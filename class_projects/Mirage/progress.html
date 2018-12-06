@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<style>
+  body {
+    padding: 100px;
+    width: 1000px;
+    margin: auto;
+    text-align: left;
+    font-weight: 300;
+    font-family: 'Open Sans', sans-serif;
+    color: #121212;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+</style>
+<title>CS 184 Final Project Milestone</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro" rel="stylesheet">
+</head>
+
+
+<body>
+
+<h1 align="middle">CS 184: Computer Graphics and Imaging, Spring 2017</h1>
+<h1 align="middle">Final Project Milestone Status Report</h1>
+<h2 align="middle">Sudeep Dasari, CS184-adw <br> Jennifer Hsu, CS184-abn</h2>
+
+
+<br><br>
+
+<div>
+
+<h2 align="middle"> Part I: Implementation of two atmospheric models </h2>
+  <h3> 1st Model: Index of Refraction changing linearly with height. </h3>
+    <p> Given the maximum and minimum index of refraction and returns a index of refraction through linear interpolation. </p>
+  <h3> 2nd Model: Ground as heat source </h3>
+    <p> Treating the ground as a heat source so index of refraction starts at a value determined by temperature of source and converges exponentially to that of air as distance from ground increases.</p>
+    <br> <br> 
+
+<h2 align="middle"> Part II: Implementation of Non-Linear Raytracing using Slab Method</h2>
+  <p> Models atmosphere as slabs of air. Each slab has a different index of refraction, but all air inside the same slab is assumed to have the same index of refraction. Clearly not 100% accurate but can be good enough for certain scenes, depending on how many slabs are chosen.</p>
+  <p> Given information of the incoming ray (including both origin and direction), we can determine the intersection of the ray and the slab and the refractive direction using Snell's Law. </p>
+        <table style="width=100%">
+        <tr>
+        <td align="middle">
+        <img src="images/slabinstruction.png" width="450px" />
+        <figcaption align="middle"> Slab Method </figcaption>
+      </tr>
+    </table>
+  <h3> Constant Index of Refraction </h3>
+        <table style="width=100%">
+        <tr>
+        <td align="middle">
+        <img src="images/int_test_index_1_1slab.png" width="300px" />
+        <figcaption align="middle"> Slab Count: 1</figcaption>
+
+        <td align="middle">
+        <img src="images/int_test_index_1_100slabs.png" width="300px" />
+        <figcaption align="middle"> Slab Count: 100</figcaption>
+ 
+      </tr>
+    </table>
+    <p>Theoretically these should be showing the same image. However, we have found that with the increase of the number of slabs, the dimmer the image seems to be. This is an artifact that we need to fix. It could easily have something to do with floating point error.</p>
+  <h3> Increasing Index of Refraction </h3>
+        <table style="width=100%">
+        <tr>
+        <td align="middle">
+        <img src="images/10slabs_increasing.png" width="300px" />
+        <figcaption align="middle"> Slab Count: 10</figcaption>
+
+        <td align="middle">
+        <img src="images/100slabs_increasing.png" width="300px" />
+        <figcaption align="middle"> Slab Count: 100</figcaption>
+ 
+        <td align="middle">
+        <img src="images/700slabs_increasing.png" width="300px" />
+        <figcaption align="middle"> Slab Count: 700</figcaption>
+      </tr>
+    </table>
+    <p> These images are rendered using an atmosphere with linearly changing index of refraction. At the bottom of the scene the refraction index is 1 and at the top it is 1.01. This change is actually higher than you would expect in real life situations, but it provides a useful demonstration. Note how the number of artifacts drastically decreases as the number of slabs is increased. Our goal is to quantify how realistic these images are and the amount of artifacts in them, and try and decrease that error as much as possible in the coming week.</p>
+  <h3> Decreasing Index of Refraction </h3>
+        <table style="width=100%">
+        <tr>
+        <td align="middle">
+        <img src="images/10slabs_decreasing.png" width="300px" />
+        <figcaption align="middle"> Slab Count: 10</figcaption>
+
+        <td align="middle">
+        <img src="images/100slabs_decreasing.png" width="300px" />
+        <figcaption align="middle"> Slab Count: 100</figcaption>
+ 
+        <td align="middle">
+        <img src="images/700slabs_decreasing.png" width="300px" />
+        <figcaption align="middle"> Slab Count: 700</figcaption>
+      </tr>
+    </table>
+
+        <p>These images are rendered using an atmosphere with linearly changing index of refraction. At the bottom of the scene the refraction index is 1.01 and at the top it is 1. Once again, this change is higher than you would expect in real life situations, but it provides a useful demonstration. </p>
+
+	<h2 align="middle"> Part III: Reflect on Progress With Plan</h2>
+	<p> Our plan by this week is to finish implementing mirages and Fata Morgana using the slab method. We have accomplsihed slab method and rendered images successfully with indoor lighting. Yet, there are still bugs for environmental lighting which we need to fix. In addition to implementing slab method, we added two different atmospheric models. This is an additional implementation compare to our schedule. </p>
+	<p> Out immediate next steps are as follows: </p>
+		<p> 1. Fix non-linear ray-tracing for environmental lighting</p>
+		<p> 2. Implement Euler's Method</p>
+		<p> 3. Placing heat sources at different locations of the scene</p>
+		<p> 4. If time allows, create different atmospheric models and compare differences</p>
+<a href="https://www.youtube.com/watch?v=JY5fzc5d4aE">Milestone Video</a>
+<br> 
+<a href="https://docs.google.com/a/berkeley.edu/presentation/d/1DZWjTugHMejenjGKO1fG3UBtJUfPZmdph4qSLC1bUk0/edit?usp=sharing"> Presentation Slides </a>
+
+<a href="testing.html"> Linking Test </a>
+</body>
+</html> 

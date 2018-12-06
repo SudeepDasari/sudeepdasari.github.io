@@ -1,0 +1,179 @@
+<h2> Outline </h2>
+
+<h3> Section I: Mirage and Fata Morgana</h3>
+	<h4> Part 1: Modeling Change of Air Density</h4>
+		<p> To account for the change of index of refraction due to the change of air density, we implemented three different methods: Equal Slab Method, Alternative Slab Method, and Euler Ray Tracing Method. </p>
+		<table style="width=100%">
+		        <tr>
+		        <td align="middle">
+		        <figure>
+		        <img src="images/mirageExplain.png" width="300px" align="middle"/>
+		        <figcaption align="middle"> Mirage <br> (The index of refraction is smaller on the bottom than on the top)</figcaption>
+		        </figure>
+		        </td>
+		      </tr>
+		</table>
+
+		<h5> Method 1: Equal Slab Method</h5>
+		<p>In this method, we model the change of air density using horizontal slabs. Each slab is of equal height and each of the slab represents a different index of refraction. To get the value for a particular position on the image plan, we shoot a ray from that position into the scene. The ray travels in a straight line until it hits the boundary of the slab. We then use Snell's Law to calculate the new direction. This ray tracing continues until the ray either hits the boundary of the scene or a primitive in the scene. </p>
+		<table style="width=100%">
+		        <tr>
+		        <td>
+		        <figure> 
+		        <img src="images/equalSlab.png" width="300px" />
+		        <figcaption align="middle"> Fixed slab height<br></figcaption>
+		        </figure>
+		      </tr>
+		</table>
+
+		<p> The following are images rendered using different number of slabs. As one can see, if we only model the air with a small number of slabs, we create a lot of artifacts, and the image looks far from accurate. It takes 700 slabs to render a relatively accurate image. </p>
+		<h5> Mirage </h5> 
+		<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/mirage10.png" width="300px" />
+		        <figcaption align="middle"> 10 slabs </figcaption>
+		        <td align="middle">
+		        <img src="images/mirage100.png" width="300px" />
+		        <figcaption align="middle"> 100 slabs </figcaption>
+		        <td align="middle">
+		        <img src="images/mirage700.png" width="300px" />
+		        <figcaption align="middle"> 700 slabs </figcaption>
+		      </tr>
+		</table>
+		<h5> Fata Morgana </h5>
+		<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/fata10.png" width="300px" />
+		        <figcaption align="middle"> 10 slabs </figcaption>
+		        <td align="middle">
+		        <img src="images/fata100.png" width="300px" />
+		        <figcaption align="middle"> 100 slabs </figcaption>
+		        <td align="middle">
+		        <img src="images/fata700.png" width="300px" />
+		        <figcaption align="middle"> 700 slabs </figcaption>
+		      </tr>
+		</table>
+		<h5> Method 2: Alternative Slab Method</h5>
+			<p> However, the method mentioned earlier has two main problems, it takes too long to render and it requires a large number of slab to generate an approximately accurate image</p>
+			<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/modifiedmethod.png" width="300px" />
+		        <figcaption align="middle"> Fix Ray Length</figcaption>
+		      </tr>
+			</table>
+			<p> In this modified slab method, instead of fixing the height of the slab, we fix the ray length, such that the light is traveling the same distance within a slab. For rays with a smaller angle (with respect to the normal), it corresponds to a larger slab. </p>	
+			<h5> Mirage </h5>		
+			<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/time_50_mirage.png" width="300px" />
+		        <figcaption align="middle"> Time Step: 50 <br> (Low Resolution) </figcaption>
+		        <td align="middle">
+		        <img src="images/time_10_mirage.png" width="300px" />
+		        <figcaption align="middle"> Time Step: 10 <br> (Moderate Resolution)</figcaption>
+		        <td align="middle">
+		        <img src="images/time_1_mirage.png" width="300px" />
+		        <figcaption align="middle"> Time Step: 1 <br> (High Resolution)</figcaption>
+		      </tr>
+			</table> 
+			<h5> Fata Morgana </h5>		
+			<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/time_50_fata.png" width="300px" />
+		        <figcaption align="middle"> Time Step: 50 <br> (Low Resolution) </figcaption>
+		        <td align="middle">
+		        <img src="images/time_10_fata.png" width="300px" />
+		        <figcaption align="middle"> Time Step: 10 <br> (Moderate Resolution)</figcaption>
+		        <td align="middle">
+		        <img src="images/time_1_fata.png" width="300px" />
+		        <figcaption align="middle"> Time Step: 1 <br> (High Resolution)</figcaption>
+		      </tr>
+			</table> 
+		<h5> Method 3: Euler Ray Tracing</h5>
+		<p> In the previous two slab methods, we assume that index of refraction stays constant in points with the same height, however, more complex scenes will require us to relax that assumption. We solve the general case using general equation based on Fermat's principles.</p>
+
+		<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/eq1.PNG" width="300px" />
+		        <figcaption align="middle"> Source: F. J. Seron et. al. </figcaption>
+		      </tr>
+		</table> 
+
+		<p> To solve discretize equation and Euler's method to estimate path. </p>
+		<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/eq2.PNG" width="300px" />
+		        <figcaption align="middle"> Source: F. J. Seron et. al. </figcaption>
+		      </tr>
+		</table> 
+
+	<h4> Part 2: Modeling Heat Source</h4>
+	<p> In a more complicated scene, the heat source might be more than just the entire floor. Using the previous example, only the red shaded area of the scene has a relatively higher temperature than the rest. 
+			<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/heatsource.png" width="300px"/>
+		        <figcaption align="middle"> The red shade area is the heat source. </figcaption>
+		      </tr>
+			</table> 
+			<br> 
+			Here is a demonstration that we can set any box in the scene to have a different index of refraction from the surrouding area. </p>
+			<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/block_in_middle.png" width="300px" />
+		        <figcaption align="middle"> The block has a 0.99 index of refraction, <br> while the rest of the area has 1 as index of refraction. </figcaption>
+		      </tr>
+			</table>
+
+
+<h3> Section II: Application - Gradient-Index Optics (GRIN) </h3>
+
+	<p> Modern camera lenses are made of different glass componenets. Each of the componenets has different index of refraction. These lenses combine together to work as an approximation ideal thin lens. Such combination deviates from the ideal thin lense models, so called aberrations. Aberrations cause visible artifacts in final images. </p>
+
+	<p>Instead, we can use lenses whose index of refraction changes throughout the material. This way, we can create flat lenses and/or lenses without abberations. In thoery, the human eye also has varying index of refraction. </p>
+
+
+	<h4> GRIN Lens Specifics</h4> 
+		<ul>
+		  <li> Index of Refraction: $N = N_0[1-(k/2)r^2]$</li>
+		  <li> Focal Length: $f = \frac{1}{N_0 \sqrt{k} sin(t \sqrt{k})}$</li>
+		  <li> Back Focal Length: $bfl = fcos(t \sqrt{k})$</li>
+		  <li> $N_0$ is base index of refraction, $k$ is gradient constant, and $t$ is lens length
+		</ul>
+		<p>Source for all equations is International Society for Optics and Photonics <br> (Read more at: https://spie.org/publications/tt48_55_gradient_index_lens)</p>
+	
+	<h4> Ray Tracing From Sensor Plane to World </h4>
+		
+
+	<br> <br> 
+	<h4> Some rendered images </h4> 
+
+			<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/bunny.png" width="300px" />
+		        <figcaption align="middle"> 512 pixel rays <br> 32 light rays <br> 10 bounces </figcaption>
+		       </tr>
+		       <tr>
+		        <td align="middle">
+		        <img src="images/dragon128.png" width="300px" />
+		        <figcaption align="middle"> 128 pixel rays <br> 32 light rays <br> 10 bounces </figcaption>
+		        <td align="middle">
+		        <img src="images/dragon512.png" width="300px" />
+		        <figcaption align="middle"> 512 pixel rays <br> 32 light rays <br> 10 bounces</figcaption>
+		      </tr>
+			</table> 
+
+<p> Milestone resources</p>
+<a href="https://www.youtube.com/watch?v=JY5fzc5d4aE">Milestone Video</a>
+<br> 
+<a href="https://docs.google.com/a/berkeley.edu/presentation/d/1DZWjTugHMejenjGKO1fG3UBtJUfPZmdph4qSLC1bUk0/edit?usp=sharing"> Presentation Slides </a>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<style>
+  body {
+    padding: 100px;
+    width: 1000px;
+    margin: auto;
+    text-align: left;
+    font-weight: 300;
+    font-family: 'Open Sans', sans-serif;
+    color: #121212;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+
+ figure {
+    display: inline-block;
+    margin: 20px; /* adjust as needed */
+}
+figure img {
+    vertical-align: top;
+}
+figure figcaption {
+    text-align: center;
+}
+</style>
+<title>CS 184 Final Project</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro" rel="stylesheet">
+</head>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<body>
+
+<h1 align="middle">CS 184: Computer Graphics and Imaging, Spring 2017</h1>
+<h1 align="middle">Final Project Report <br> Mirage and Fata Morgana</h1>
+<h2 align="middle">Sudeep Dasari, CS184-adw <br> Jennifer Hsu, CS184-abn</h2>
+
+
+<br><br>
+
+<h2> Abstract</h2>
+<p> In project 3, the ray-tracing algorithm assumes that light travels in a straight line from the camera into the scene. However, there are sundry cases where a light takes on a non-linear path. For example, on a hot summer day light rays travelling parallel to the ground curves upwards into the sky, causing a non-existent pool of blue to form on the ground. Our project seeks to correctly model these optical effects using a slab based technique and a more flexible Euler integration technique. These algorithms are applied to model optical phenomena - like mirages and Fata Morgana – as well as ray trace scenes through lenses with unique optical properties. </p> 
+<h2> Technical Approach </h2>
+<h3> Slab Method </h3>
+<p>In this method, we model the change of air density using horizontal slabs. Each slab is of equal height and each of the slab represents a different index of refraction. To get the pixel value for a particular position on the image plan, we shoot a ray from that position into the scene. The ray travels in a straight line until it hits the boundary of the slab. We then use Snell's Law to calculate the new direction. This ray tracing continues until the ray either hits the boundary of the scene or a primitive in the scene. </p>
+		<table style="width=100%">
+		        <tr>
+		        <td>
+		        <figure> 
+		        <img src="images/equalSlab.png" width="300px" />
+		        <figcaption align="middle"> Fixed slab height<br></figcaption>
+		        </figure>
+		      </tr>
+		</table>
+
+<h3> Modified Slab Method </h3>
+<p> While the slab method mentioned above is more intuitive, it holds a major problem. In order to generate a relatively accurate image (in comparision to the Euler Integration Technique mentioned later in the report), it requires a large number of slabs. Each transition between slabs require a snell's law calculation, hence it takes a long time to render. </p>
+
+<p> Instead of fixing the height of the slab, we can fix the ray length, such that the light is traveling the same distance within a slab. This modified version of the slab method proves to render faster due to the decreased number of slabs. For rays with a smaller angle (with respect to the normal), it corresponds to a larger slab. </p>
+			<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/modifiedmethod.png" width="300px" />
+		        <figcaption align="middle"> Fix Ray Length</figcaption>
+		      </tr>
+			</table>
+
+<h3> Euler Integration Technique </h3>
+ <p> Both slab techniques assume that index of refraction only varies with height. Obviously, this constraint is easy to violate, and ideally our algorithm would still produce viable results even in scenes with complex changes in refractive index. Solving the more general problem requires a more generalized approach. These equations – based on Fermat’s principles and presented by F.J Seron et al. – relate the index of refraction to the slope of a light ray at a point. </p>
+ <table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/eq1.PNG" width="300px" />
+		        <figcaption align="middle"> Source: F. J. Seron et. al. </figcaption>
+		      </tr>
+		</table> 
+
+		<p> In practice this differential equation can be discretized and solved with Euler integration. </p>
+		<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/eq2.PNG" width="300px" />
+		        <figcaption align="middle"> Source: F. J. Seron et. al. </figcaption>
+		      </tr>
+		</table> 
+<p> Note that this formula can easily be solved iteratively so long as the following quantities are known: the index of refraction and light ray slope at the last time step, the index of refraction at current time step, and derivative of the index of refraction function with respect to position. </p>
+
+<h2> Results and Applications</h2> 
+
+<h3> Results from Slab Method </h3>
+		<p> For reference, below is an image rendered using constant index of refraction throughout the scene. </p>
+				<table style="width=100%">
+					   <tr>
+				        <td align="middle">
+				        <img src="images/l_1_constant.png" width="300px" />
+				        <figcaption align="middle"> Constant Index of Refraction</figcaption>
+				      </tr>
+				</table>
+		<p> Below are images generated using 10, 100, and 700 slabs respectively. The scene modeled using only 10 slabs produces a lot of artifacts. It takes as many as 700 slabs to render a generally accurate image. </p>
+		<h4> Mirage (Top index of refraction = 1.01, Bottom index of refraction = 1.00)</h4> 
+				<table style="width=100%">
+					   <tr>
+				        <td align="middle">
+				        <img src="images/mirage10.png" width="300px" />
+				        <figcaption align="middle"> 10 slabs </figcaption>
+				        <td align="middle">
+				        <img src="images/mirage100.png" width="300px" />
+				        <figcaption align="middle"> 100 slabs </figcaption>
+				        <td align="middle">
+				        <img src="images/mirage700.png" width="300px" />
+				        <figcaption align="middle"> 700 slabs </figcaption>
+				      </tr>
+				</table>
+		<h4> Fata Morgana (Top index of refraction = 1.00, Bottom index of refraction = 1.01)</h4> 
+				<table style="width=100%">
+					   <tr>
+				        <td align="middle">
+				        <img src="images/fata10.png" width="300px" />
+				        <figcaption align="middle"> 10 slabs </figcaption>
+				        <td align="middle">
+				        <img src="images/fata100.png" width="300px" />
+				        <figcaption align="middle"> 100 slabs </figcaption>
+				        <td align="middle">
+				        <img src="images/fata700.png" width="300px" />
+				        <figcaption align="middle"> 700 slabs </figcaption>
+				      </tr>
+				</table>
+<h3> Results from Modified Slab Method </h3>
+	<p> In the modified version, the parameter becomes the time that the ray traverses through the scene. In general, with all attributes equal, the longer each ray travels in a slab, the larger the slab. When the scene is modeled with large time steps (ex: 50 units), the scene looks very similar to the constant index of refraction scene. As the time step decreases, distortions start to show. </p>
+
+	<p>Note that scenes rendered with time step 1 and scenes rendered using 700 slabs of equal height look similar to each other. </p>
+
+		<h4> Mirage (Top index of refraction = 1.01, Bottom index of refraction = 1.00)</h4>	
+			<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/time_50_mirage.png" width="300px" /> 
+		        <figcaption align="middle"> Time Step: 50 <br> </figcaption>
+		        <td align="middle">
+		        <img src="images/time_10_mirage.png" width="300px" />
+		        <figcaption align="middle"> Time Step: 10 <br> </figcaption>
+		        <td align="middle">
+		        <img src="images/time_1_mirage.png" width="300px" />
+		        <figcaption align="middle"> Time Step: 1 <br> </figcaption>
+		      </tr>
+			</table> 
+		<h4> Fata Morgana (Top index of refraction = 1.00, Bottom index of refraction = 1.01)</h4> 	
+			<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/time_50_fata.png" width="300px" />
+		        <figcaption align="middle"> Time Step: 50 <br> </figcaption>
+		        <td align="middle">
+		        <img src="images/time_10_fata.png" width="300px" />
+		        <figcaption align="middle"> Time Step: 10 <br> </figcaption>
+		        <td align="middle">
+		        <img src="images/time_1_fata.png" width="300px" />
+		        <figcaption align="middle"> Time Step: 1 <br> </figcaption>
+		      </tr>
+			</table> 
+<h3> Changing Index of Refraction </h3>
+	<p> All of the scenes below are rendered with the bottom index of refraction as 1.00</p>
+			<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/index_1.png" width="300px" />
+		        <figcaption align="middle"> Top index of refraction  = 1.00 </figcaption>
+		       	<td align="middle">
+		        <img src="images/index_1001_2.png" width="300px" />
+		        <figcaption align="middle">Top index of refraction  = 1.001 </figcaption>
+		        <td align="middle">
+		        <img src="images/index_101_2.png" width="300px" />
+		        <figcaption align="middle"> Top index of refraction =  1.01 </figcaption>
+		        <td align="middle">
+		        <img src="images/index_102_2.png" width="300px" />
+		        <figcaption align="middle"> Top index of refraction =  1.02 </figcaption>
+		      </tr>
+			</table>	
+	<p> All of the scenes below are rendered with the top index of refraction as 1.00</p>
+			<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/index_1.png" width="300px" />
+		        <figcaption align="middle"> Bottom index of refraction  = 1.00 </figcaption>
+		       	<td align="middle">
+		        <img src="images/index_1001_2.png" width="300px" />
+		        <figcaption align="middle">Bottom index of refraction  = 1.001 </figcaption>
+		        <td align="middle">
+		        <img src="images/index_101_2.png" width="300px" />
+		        <figcaption align="middle"> Bottom index of refraction =  1.01 </figcaption>
+		        <td align="middle">
+		        <img src="images/index_102_2.png" width="300px" />
+		        <figcaption align="middle"> Bottom index of refraction =  1.02 </figcaption>
+		      </tr>
+			</table>	
+<h3> Rendered Using Environmental Lighting </h3>
+	<p> The below images are rendered using different gradient of index of refraction. A mirage occurs when setting the index of refraction to be larger on the botoom. The opposite is true for fata morgana. </p>
+	<p> Note the change of the surface. In figure 2, due to the change of index of refraction, light bends upward, hence the boundary of the surface is lower than Figure 1. The opposite is true for Figure 3. </p>
+			<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/l_1_constant_env.png" width="300px" />
+		        <figcaption align="middle"> Figure 1. <br> Constant Index of Refraction <br> Top index of refraction  = 1.00 <br> Bottom index of refraction = 1.00 </figcaption>
+		       	<td align="middle">
+		        <img src="images/l_1_decreasing_env.png" width="300px" />
+		        <figcaption align="middle"> Figure 2. <br> Mirage <br> Top index of refraction  = 1.01 <br> Bottom index of refraction = 1.00</figcaption>
+		        <td align="middle">
+		        <img src="images/l_1_increasing_env.png" width="300px" />
+		        <figcaption align="middle"> Figure 3. <br> Fata Morgana <br> Top index of refraction =  1.00 <br> Bottom index of refraction = 1.01 </figcaption>
+		      </tr>
+			</table>
+
+<h3> Rendering Blocks with Different Refractive Properties</h3>
+	<p> In order to model heat sources / heat sinks in a scene, we need a way to set part of the scene to have a different index of refraction from the rest. The image below is a demonstration that we can set any box in a scene to have a different index of refraction. </p>
+			<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/block_in_middle.png" width="300px" />
+		        <figcaption align="middle"> The block has a 0.99 index of refraction, <br> while the rest of the area has 1 as index of refraction. </figcaption>
+		      </tr>
+			</table>
+<h3> Gradient Index Optics Lens Application </h3>
+<p> The Euler integration proved to be overkill for simple mirage and fata morgana rendering. Gradient Optics (GRIN) lenses – lenses where the index of refraction changes as a function of position – proved to be the perfect application to test the Euler integration method. Specifically, the ray tracer’s camera uses a cylindrical GRIN lens with index of refraction that varies quadratically as a function of radius. </p>
+
+<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/grin_diagram.png" width="500px" />
+		      </tr>
+		</table> 
+<p> The lens equations above come from the International Society for Optics and Photonics (read more <a href="https://spie.org/publications/tt48_55_gradient_index_lens">here</a>). Note that the gradient of the above index of refraction equation with respect to (x,y,z) coordinates is: </p>
+
+<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/gradient.png" width="300px" />
+		      </tr>
+		</table> 
+<p> Using this gradient and Euler integration rays can be traced from a point behind the lens out into the front. Below are traces generated by a python script that plot light flowing through the lens from camera position out into the world. The light takes a curved path in a GRIN lens unlike the straight path it would normally take in glass. </p>
+<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/diag1.png" width="300px" />
+		        <td align="middle">
+		        <img src="images/diag2.png" width="300px" />
+		       </tr>
+		       <tr>
+		        <td align="middle">
+		        <img src="images/diag3.png" width="300px" />
+		        <td align="middle">
+		        <img src="images/diag4.png" width="300px" />
+		      </tr>
+		</table> 
+<p> All the pieces of the puzzle are ready for building a full ray tracer with a GRIN lens! The Monte-Carlo ray tracing algorithm is modified to account for the GRIN lens as follows: the random (x, y) position is scaled according to FOV parameters and mapped to (-X, -Y, zi) on the focal plane (where zi is displacement of sensor plane solved for by thin lens equation),  a random point on lens back plane is sampled at random, a ray is traced linearly from sensor to lens back plane, the Euler integration technique traces rays through the GRIN lens, and finally the light ray exits the lens and is traced as normal. A trace that cannot successfully pass through the lens is returned as invalid and causes a 0 spectrum. This basic technique is very noisy due to many failed lens traces. Thus, random points on the lens are tried until a ray finally gets through to the other side or a max iteration cap is hit. In theory we should be dividing by the number of attempted rays (including fails) when computing the final Monte-Carlo estimation, but empirically doing so generated very dim images. Instead the ray tracer divides by the number of samples per pixel as usual, which correctly brightens the image. This change can be likened to applying a gain to the camera to generate brighter images. </p>
+
+<p> Below are renders of CBbunny and CBdragon using the modified camera and GRIN lens at various quality levels and focused at various depths. Note that the GRIN lens behaves much like a thin lens with no visible aberration! This is pretty impressive considering it is a real physical component. The sensor field of view was chosen to be slightly larger than the lens radius to cause the vignette effect on the sides, where less light gets out to the scene. </p>
+
+			<table style="width=100%">
+			   <tr>
+		        <td align="middle">
+		        <img src="images/bunny.png" width="300px" />
+		        <figcaption align="middle"> 512 pixel rays 32 light rays 10 bounces </figcaption>
+		       </tr>
+		       <tr>
+		        <td align="middle">
+		        <img src="images/dragon128.png" width="300px" />
+		        <figcaption align="middle"> 128 pixel rays 32 light rays 10 bounces </figcaption>
+		        <td align="middle">
+		        <img src="images/dragon512.png" width="300px" />
+		        <figcaption align="middle"> 512 pixel rays 32 light rays 10 bounces</figcaption>
+		      </tr>
+			</table> 
+
+
+<h2> Team Video</h2>
+<p> Our video can be found <a href="https://www.youtube.com/watch?v=Y6lmJ2immII&feature=youtu.be"> here </a>.
+
+<h2> Contributions from each team member</h2>
+	<p> We worked together to get the initial proof of concept working with the slab technique. After that, Jennifer worked on implementing the modified slab technique and generated results for the Fata Morgana and Mirage scenes. Sudeep worked on implementing the Euler Integration technique in code, and generated the GRIN lens results. Both teammates worked on research, and together came up with the direction of the project. </p> 
+<h2> Reflections and Lessons Learned </h2>
+<p> We learned a lot about the research process and taking ideas from theory to fruition. Our topic had a bunch of theoretical literature, so one of the main challenges was finding cool applications that could really showcase the techniques we were implementing. For example, the entire GRIN lens part of our project was entirely unplanned, yet worked as a really cool demo for the techniques we worked on implementing. We learned a lot about debugging graphics applications: especially since it was hard to tell if the blank screen was a result of a programming error or mistake in our math at times. Overall, the final project was a fun experience, and the final renders we got after the research and coding work were supper rewarding. </p>
+
+<h2> References</h2>
+Seron, F.j., D. Gutierrez, G. Gutierrez, and E. Cerezo. "Implementation of a Method of Curved Ray
+Tracing for Inhomogeneous Atmospheres." Computers & Graphics 29.1 (2005): 95-108.Web.
+<br>
+"Gradient Index Lens." SPIE. International Society for Optics and Photonics, n.d. Web. 28 Apr. 2017.
+<https://spie.org/publications/tt48_55_gradient_index_lens>.
+
