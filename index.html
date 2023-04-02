@@ -161,6 +161,39 @@
 
         <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
 
+          <tr>
+            <td width="33%" valign="top" align="center"><a href="https://agi-labs.github.io/manipulate-by-seeing/">
+            <img src="research/manipulate_by_seeing/test.gif" alt="Loading!" width="180" style="padding-top:0px;padding-bottom:0px;border-radius:15px;border:1px solid black">
+            </a></td>
+            <td width="67%" valign="top">
+              <p><a href="https://agi-labs.github.io/manipulate-by-seeing/">
+              <!-- <img src="images/new.png" alt="[NEW]" width="6%" style="border-style: none"> -->
+              <papertitle>Manipulate by Seeing: Creating Manipulation Controllers from Pre-Trained Representations</papertitle></a><br>
+              Jianren Wang*, Sudeep Dasari*, Mohan Kumar Srirama, Shubham Tulsiani, Abhinav Gupta<br>
+
+              </p>
+          
+              <div class="paper" id="manipulateseeing">
+                  <a href="https://agi-labs.github.io/manipulate-by-seeing/">webpage</a> |
+                  <a href="javascript:toggleblock('manipulateseeing_abs')">abstract</a> |
+                  <a shape="rect" href="javascript:togglebib('manipulateseeing')" class="togglebib">bibtex</a> |
+                  <a href="https://arxiv.org/abs/2303.08135">arXiv</a>
+              
+                  <abs align="justify" id="manipulateseeing_abs"> The field of visual representation learning has seen explosive growth in the past years, but its benefits in robotics have been surprisingly limited so far. Prior work uses generic visual representations as a basis to learn (task-specific) robot action policies (e.g. via behavior cloning). While the visual representations do accelerate learning, they are primarily used to encode visual observations. Thus, action information has to be derived purely from robot data, which is expensive to collect! In this work, we present a scalable alternative where the visual representations can help directly infer robot actions. We observe that vision encoders express relationships between image observations as \textit{distances} (e.g. via embedding dot product) that could be used to efficiently plan robot behavior. We operationalize this insight and develop a simple algorithm for acquiring a distance function and dynamics predictor, by fine-tuning a pre-trained representation on human collected video sequences. The final method is able to substantially outperform traditional robot learning baselines (e.g. 70% success v.s. 50% for behavior cloning on pick-place) on a suite of diverse real-world manipulation tasks. It can also generalize to novel objects, without using any robot demonstrations during train time.</abs>
+              
+                  <pre xml:space="preserve">
+@article{wang2023manipulate,
+  title={Manipulate by Seeing: Creating Manipulation Controllers from Pre-Trained Representations},
+  author={Wang, Jianren and Dasari, Sudeep and Srirama, Mohan Kumar and Tulsiani, Shubham and Gupta, Abhinav},
+  journal={arXiv e-prints},
+  pages={arXiv--2303},
+  year={2023}
+}
+                  </pre>
+              </div>
+            </td>
+          </tr>
+
           <tr bgcolor="#ffffd0">
             <td width="33%" valign="top" align="center"><a href="https://pregrasps.github.io/">
             <video autoplay loop muted playsinline src="research/pgdm/teaser.m4v" alt="Loading!" width="180" style="padding-top:0px;padding-bottom:0px;border-radius:15px;border:1px solid black"></video>
