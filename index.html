@@ -162,6 +162,39 @@
         <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
 
           <tr bgcolor="#ffffd0">
+            <td width="33%" valign="top" align="center"><a href="https://data4robotics.github.io/">
+              <video autoplay loop muted playsinline src="research/datapaper/teaser.mp4" alt="Loading!" width="180" style="padding-top:0px;padding-bottom:0px;border-radius:15px;border:1px solid black"></video>
+            </a></td>
+            <td width="67%" valign="top">
+              <p><a href="https://data4robotics.github.io/">
+              <!-- <img src="images/new.png" alt="[NEW]" width="6%" style="border-style: none"> -->
+              <papertitle>An Unbiased Look at Datasets for Visuo-Motor Pre-Training</papertitle></a><br>
+              Sudeep Dasari, Mohan Kumar Srirama, Unnat Jain*, Abhinav Gupta*<br>
+              <em>7th Conference on Robot Learning (CoRL)</em>, 2023
+              </p>
+          
+              <div class="paper" id="datapaper">
+                  <a href="https://data4robotics.github.io/">webpage</a> |
+                  <a href="javascript:toggleblock('datapaper_abs')">abstract</a> |
+                  <a shape="rect" href="javascript:togglebib('datapaper')" class="togglebib">bibtex</a> |
+                  <a href="https://arxiv.org/abs/2310.09289">arXiv</a>
+              
+                  <abs align="justify" id="datapaper_abs"> Visual representation learning hold great promise for robotics, but is severely hampered by the scarcity and homogeneity of robotics datasets. Recent works address this problem by pre-training visual representations on large-scale but out-of-domain data (e.g., videos of egocentric interactions) and then transferring them to target robotics tasks. While the field is heavily focused on developing better pre-training algorithms, we find that dataset choice is just as important to this paradigm's success. After all, the representation can only learn the structures or priors present in the pre-training dataset. To this end, we flip the focus on algorithms, and instead conduct a dataset centric analysis of robotic pre-training. Our findings call into question some common wisdom in the field. We observe that traditional vision datasets (like ImageNet, Kinetics and 100 Days of Hands) are surprisingly competitive options for visuo-motor representation learning, and that the pre-training dataset's image distribution matters more than its size. Finally, we show that common simulation benchmarks are not a reliable proxy for real world performance and that simple regularization strategies can dramatically improve real world policy learning.</abs>
+              
+                  <pre xml:space="preserve">
+@inproceedings{dasari2023datasets,
+  title={An Unbiased Look at Datasets for Visuo-Motor Pre-Training},
+  author={Dasari, Sudeep and Srirama, Mohan Kumar and Jain, Unnat and Gupta, Abhinav},
+  booktitle={Conference on Robot Learning},
+  year={2023},
+  organization={PMLR}
+}
+                  </pre>
+              </div>
+            </td>
+          </tr>
+
+          <tr bgcolor="#ffffd0">
             <td width="33%" valign="top" align="center"><a href="https://agi-labs.github.io/manipulate-by-seeing/">
             <img src="research/manipulate_by_seeing/test.gif" alt="Loading!" width="180" style="padding-top:0px;padding-bottom:0px;border-radius:15px;border:1px solid black">
             </a></td>
@@ -467,7 +500,7 @@
             </td>
           </tr>
 
-          <tr bgcolor="#ffffd0">
+          <tr>
             <td width="33%" valign="top" align="center"><a href="https://sites.google.com/view/daml">
               <img src="research/DAML/human_imitation_small.gif" alt="Loading!" width="180" style="padding-top:0px;padding-bottom:0px;border-radius:15px;border:1px solid black"></a></td>
             <td width="67%" valign="top">
