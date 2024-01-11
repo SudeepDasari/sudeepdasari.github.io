@@ -160,6 +160,36 @@
         </table>
 
         <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+          <tr>
+            <td width="33%" valign="top" align="center"><a href="https://octo-models.github.io">
+              <video autoplay loop muted playsinline src="https://octo-models.github.io/videos/out_cmu.mp4" alt="Loading!" width="180" style="padding-top:0px;padding-bottom:0px;border-radius:15px;border:1px solid black"></video>
+            </a></td>
+            <td width="67%" valign="top">
+              <p><a href="https://octo-models.github.io">
+              <papertitle>Octo: An Open-Source Generalist Robot Policy</papertitle></a><br>
+              Dibya Ghosh*, Homer Walke*, Karl Pertsch*, Kevin Black*, Oier Mees*, Sudeep Dasari, Joey Hejna, Charles Xu, Jianlan Luo, Tobias Kreiman, You Liang Tan, Dorsa Sadigh, Chelsea Finn, Sergey Levine<br>
+              <!-- <em>7th Conference on Robot Learning (CoRL)</em>, 2023 -->
+              </p>
+          
+              <div class="paper" id="octo">
+                  <a href="https://octo-models.github.io">webpage</a> |
+                  <a href="javascript:toggleblock('octo_abs')">abstract</a> |
+                  <a shape="rect" href="javascript:togglebib('octo')" class="togglebib">bibtex</a> |
+                  <a href="https://octo-models.github.io/paper.pdf">paper</a>
+              
+                  <abs align="justify" id="octo_abs"> Large policies, pretrained on diverse robot datasets have the potential to transform robot learning: instead of training new policies from scratch, such generalist robot policies may be finetuned with only a little in-domain data, yet generalize broadly. However, existing models restrict downstream users to the exact inputs and action spaces used during pretraining and the largest models are typically not available to the public. In this work, we aim to lay the ground work towards developing open-source, widely applicable, generalist policies for robotic manipulation. As a first step, we introduce Octo, a transformer-based diffusion policy trained on 800k robot trajectories from the Open X-Embodiment dataset. It can be instructed via language commands or goal images and can be effectively finetuned to robot setups with new sensory inputs and action spaces within a few hours on standard consumer GPUs. In experiments across 6 robotic platforms we demonstrate that Octo serves as a versatile policy initialization that can be effectively finetuned to new observation and action spaces.</abs>
+              
+                  <pre xml:space="preserve">
+@misc{octo_2023,
+  title={Octo: An Open-Source Generalist Robot Policy},
+  author = {{Octo Model Team} and Dibya Ghosh and Homer Walke and Karl Pertsch and Kevin Black and Oier Mees and Sudeep Dasari and Joey Hejna and Charles Xu and Jianlan Luo and Tobias Kreiman and {You Liang} Tan and Dorsa Sadigh and Chelsea Finn and Sergey Levine},
+  howpublished  = {\url{https://octo-models.github.io}},
+  year = {2023},
+}
+                  </pre>
+              </div>
+            </td>
+          </tr>
 
           <tr bgcolor="#ffffd0">
             <td width="33%" valign="top" align="center"><a href="https://data4robotics.github.io/">
@@ -167,7 +197,6 @@
             </a></td>
             <td width="67%" valign="top">
               <p><a href="https://data4robotics.github.io/">
-              <!-- <img src="images/new.png" alt="[NEW]" width="6%" style="border-style: none"> -->
               <papertitle>An Unbiased Look at Datasets for Visuo-Motor Pre-Training</papertitle></a><br>
               Sudeep Dasari, Mohan Kumar Srirama, Unnat Jain*, Abhinav Gupta*<br>
               <em>7th Conference on Robot Learning (CoRL)</em>, 2023
@@ -604,7 +633,7 @@
                 function dragon_stop() {
                   document.getElementById('dragon_still').style.opacity = '0';
                 }
-                eccv12_stop()
+                
               </script>
             <td width="75%" valign="top">
               <p>
