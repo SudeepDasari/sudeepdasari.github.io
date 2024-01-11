@@ -161,7 +161,40 @@
 
         <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
 
-          <tr>
+          <tr bgcolor="#ffffd0">
+            <td width="33%" valign="top" align="center"><a href="https://data4robotics.github.io/">
+              <video autoplay loop muted playsinline src="research/datapaper/teaser.mp4" alt="Loading!" width="180" style="padding-top:0px;padding-bottom:0px;border-radius:15px;border:1px solid black"></video>
+            </a></td>
+            <td width="67%" valign="top">
+              <p><a href="https://data4robotics.github.io/">
+              <!-- <img src="images/new.png" alt="[NEW]" width="6%" style="border-style: none"> -->
+              <papertitle>An Unbiased Look at Datasets for Visuo-Motor Pre-Training</papertitle></a><br>
+              Sudeep Dasari, Mohan Kumar Srirama, Unnat Jain*, Abhinav Gupta*<br>
+              <em>7th Conference on Robot Learning (CoRL)</em>, 2023
+              </p>
+          
+              <div class="paper" id="datapaper">
+                  <a href="https://data4robotics.github.io/">webpage</a> |
+                  <a href="javascript:toggleblock('datapaper_abs')">abstract</a> |
+                  <a shape="rect" href="javascript:togglebib('datapaper')" class="togglebib">bibtex</a> |
+                  <a href="https://arxiv.org/abs/2310.09289">arXiv</a>
+              
+                  <abs align="justify" id="datapaper_abs"> Visual representation learning hold great promise for robotics, but is severely hampered by the scarcity and homogeneity of robotics datasets. Recent works address this problem by pre-training visual representations on large-scale but out-of-domain data (e.g., videos of egocentric interactions) and then transferring them to target robotics tasks. While the field is heavily focused on developing better pre-training algorithms, we find that dataset choice is just as important to this paradigm's success. After all, the representation can only learn the structures or priors present in the pre-training dataset. To this end, we flip the focus on algorithms, and instead conduct a dataset centric analysis of robotic pre-training. Our findings call into question some common wisdom in the field. We observe that traditional vision datasets (like ImageNet, Kinetics and 100 Days of Hands) are surprisingly competitive options for visuo-motor representation learning, and that the pre-training dataset's image distribution matters more than its size. Finally, we show that common simulation benchmarks are not a reliable proxy for real world performance and that simple regularization strategies can dramatically improve real world policy learning.</abs>
+              
+                  <pre xml:space="preserve">
+@inproceedings{dasari2023datasets,
+  title={An Unbiased Look at Datasets for Visuo-Motor Pre-Training},
+  author={Dasari, Sudeep and Srirama, Mohan Kumar and Jain, Unnat and Gupta, Abhinav},
+  booktitle={Conference on Robot Learning},
+  year={2023},
+  organization={PMLR}
+}
+                  </pre>
+              </div>
+            </td>
+          </tr>
+
+          <tr bgcolor="#ffffd0">
             <td width="33%" valign="top" align="center"><a href="https://agi-labs.github.io/manipulate-by-seeing/">
             <img src="research/manipulate_by_seeing/test.gif" alt="Loading!" width="180" style="padding-top:0px;padding-bottom:0px;border-radius:15px;border:1px solid black">
             </a></td>
@@ -170,7 +203,7 @@
               <!-- <img src="images/new.png" alt="[NEW]" width="6%" style="border-style: none"> -->
               <papertitle>Manipulate by Seeing: Creating Manipulation Controllers from Pre-Trained Representations</papertitle></a><br>
               Jianren Wang*, Sudeep Dasari*, Mohan Kumar Srirama, Shubham Tulsiani, Abhinav Gupta<br>
-
+              Oral at <em>International Conference on Computer Vision (ICCV)</em>, 2023
               </p>
           
               <div class="paper" id="manipulateseeing">
@@ -185,8 +218,7 @@
 @article{wang2023manipulate,
   title={Manipulate by Seeing: Creating Manipulation Controllers from Pre-Trained Representations},
   author={Wang, Jianren and Dasari, Sudeep and Srirama, Mohan Kumar and Tulsiani, Shubham and Gupta, Abhinav},
-  journal={arXiv e-prints},
-  pages={arXiv--2303},
+  booktitle={International Conference on Computer Vision (ICCV)},
   year={2023}
 }
                   </pre>
@@ -194,7 +226,39 @@
             </td>
           </tr>
 
-          <tr bgcolor="#ffffd0">
+          <tr>
+            <td width="33%" valign="top" align="center"><a href="https://sites.google.com/view/myodex">
+            <video autoplay loop muted playsinline src="research/myodex/teaser.mp4" alt="Loading!" width="180" style="padding-top:0px;padding-bottom:0px;border-radius:15px;border:1px solid black"></video>
+            </a></td>
+            <td width="67%" valign="top">
+              <p><a href="https://sites.google.com/view/myodex">
+              <!-- <img src="images/new.png" alt="[NEW]" width="6%" style="border-style: none"> -->
+              <papertitle>MyoDex: A Generalizable Prior for Dexterous Manipulation</papertitle></a><br>
+              Vittorio Caggiano, Sudeep Dasari, Vikash Kumar<br>
+              <em>40th International Conference on Machine Learning (ICML)</em>, 2023
+              </p>
+          
+              <div class="paper" id="myodex">
+                  <a href="https://sites.google.com/view/myodex">webpage</a> |
+                  <a href="javascript:toggleblock('myodex_abs')">abstract</a> |
+                  <a shape="rect" href="javascript:togglebib('myodex')" class="togglebib">bibtex</a> |
+                  <a href="https://arxiv.org/abs/2309.03130">arXiv</a>
+              
+                  <abs align="justify" id="myodex_abs"> Human dexterity is a hallmark of motor control. Our hands can rapidly synthesize new behaviors despite the complexity (multi-articular and multi-joints, with 23 joints controlled by more than 40 muscles) of musculoskeletal sensory-motor circuits. In this work, we take inspiration from how human dexterity builds on a diversity of prior experiences, instead of being acquired through a single task. Motivated by this observation, we set out to develop agents that can build upon their previous experience to quickly acquire new (previously unattainable) behaviors. Specifically, our approach leverages multi-task learning to implicitly capture task-agnostic behavioral priors (MyoDex) for human-like dexterity, using a physiologically realistic human hand model - MyoHand. We demonstrate MyoDex's effectiveness in few-shot generalization as well as positive transfer to a large repertoire of unseen dexterous manipulation tasks. Agents leveraging MyoDex can solve approximately 3x more tasks, and 4x faster in comparison to a distillation baseline. While prior work has synthesized single musculoskeletal control behaviors, MyoDex is the first generalizable manipulation prior that catalyzes the learning of dexterous physiological control across a large variety of contact-rich behaviors. We also demonstrate the effectiveness of our paradigms beyond musculoskeletal control towards the acquisition of dexterity in 24 DoF Adroit Hand.</abs>
+              
+                  <pre xml:space="preserve">
+@article{caggiano2023myodex,
+  title={MyoDex: A Generalizable Prior for Dexterous Manipulation},
+  author={Caggiano, Vittorio and Dasari, Sudeep and Kumar, Vikash},
+  booktitle={International Conference on Machine Learning (ICML)},
+  year={2023}
+}
+                  </pre>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
             <td width="33%" valign="top" align="center"><a href="https://pregrasps.github.io/">
             <video autoplay loop muted playsinline src="research/pgdm/teaser.m4v" alt="Loading!" width="180" style="padding-top:0px;padding-bottom:0px;border-radius:15px;border:1px solid black"></video>
             <!-- <img src="url.gif" alt="sym" width="90%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;border:1px solid black"> -->
@@ -219,10 +283,12 @@
               
                   <pre xml:space="preserve">
 @inproceedings{dasari2023pgdm,
-  title={Learning Dexterous Manipulation from Exemplar Object Trajectories and Pre-Grasps},
+  title={Learning dexterous manipulation from exemplar object trajectories and pre-grasps},
   author={Dasari, Sudeep and Gupta, Abhinav and Kumar, Vikash},
-  booktitle={IEEE International Conference on Robotics and Automation 2023},
-  year={2023}
+  booktitle={2023 IEEE International Conference on Robotics and Automation (ICRA)},
+  pages={3889--3896},
+  year={2023},
+  organization={IEEE}
 }
                   </pre>
               </div>
@@ -262,7 +328,7 @@
             </td>
           </tr>
 
-          <tr>
+          <tr bgcolor="#ffffd0">
             <td width="33%" valign="top" align="center"><a href="https://oneshotfeatures.github.io/">
             <img src="research/OST/teaser.png" alt="Loading!" width="180" style="padding-top:0px;padding-bottom:0px;border-radius:15px;border:1px solid black">
             </a></td>
@@ -434,7 +500,7 @@
             </td>
           </tr>
 
-          <tr bgcolor="#ffffd0">
+          <tr>
             <td width="33%" valign="top" align="center"><a href="https://sites.google.com/view/daml">
               <img src="research/DAML/human_imitation_small.gif" alt="Loading!" width="180" style="padding-top:0px;padding-bottom:0px;border-radius:15px;border:1px solid black"></a></td>
             <td width="67%" valign="top">
