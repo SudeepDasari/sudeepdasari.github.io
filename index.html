@@ -92,6 +92,16 @@
     span.highlight {
       background-color: #ffffd0;
     }
+    .author-block {
+            display: none;
+    }
+    .team-name:hover {
+            display: block; /* Show team name on hover */
+    }
+  .team-name:hover + .author-block {
+            display: block; /* Show full list on hover */
+  }
+
   </style>
   <link rel="icon" href="https://www.ri.cmu.edu/app/uploads/2017/02/ri-placeholder-66x66.jpg" sizes="32x32" />
   <link rel="icon" href="https://www.ri.cmu.edu/app/uploads/2017/02/ri-placeholder-200x200.jpg" sizes="192x192" />
@@ -160,6 +170,43 @@
         </table>
 
         <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+          <tr>
+            <td width="33%" valign="top" align="center"><a href="https://droid-dataset.github.io">
+              <video autoplay loop muted playsinline src="https://droid-dataset.github.io/videos/droid_eval_videos/cooking_droid_speed.mp4" alt="Loading!" width="180" style="padding-top:0px;padding-bottom:0px;border-radius:15px;border:1px solid black"></video>
+            </a></td>
+            <td width="67%" valign="top">
+              <p><a href="https://droid-dataset.github.io">
+              <papertitle>DROID: A Large-Scale In-the-Wild Robot Manipulation Dataset</papertitle></a><br>
+              
+              <div class="is-size-5 publication-authors">
+                <span class="team-name"><b><a href="https://droid-dataset.github.io">DROID Dataset Team</a></b></span>
+                <span class="author-block">
+                    Alexander Khazatsky<sup>*</sup>, Karl Pertsch<sup>*</sup>, Suraj Nair, Ashwin Balakrishna, Sudeep Dasari, Siddharth Karamcheti, Soroush Nasiriany, Mohan Kumar Srirama, Lawrence Yunliang Chen, Kirsty Ellis, Peter David Fagan, Joey Hejna, Masha Itkina, Marion Lepert, Yecheng Jason Ma, Patrick Tree Miller, Jimmy Wu, Suneel Belkhale, Shivin Dass, Huy Ha, Arhan Jain, Abraham Lee, Youngwoon Lee, Marius Memmel, Sungjae Park, Ilija Radosavovic, Kaiyuan Wang, Albert Zhan, Kevin Black, Cheng Chi, Kyle Beltran Hatch, Shan Lin, Jingpei Lu, Jean Mercat, Abdul Rehman, Pannag R Sanketi, Archit Sharma, Cody Simpson, Quan Vuong, Homer Rich Walke, Blake Wulfe, Ted Xiao, Jonathan Heewon Yang, Arefeh Yavary, Tony Z. Zhao, Christopher Agia, Rohan Baijal, Mateo Guaman Castro, Daphne Chen, Qiuyu Chen, Trinity Chung, Jaimyn Drake, Ethan Paul Foster, Jensen Gao, David Antonio Herrera, Minho Heo, Kyle Hsu, Jiaheng Hu, Donovon Jackson, Charlotte Le, Yunshuang Li, Kevin Lin, Roy Lin, Zehan Ma, Abhiram Maddukuri, Suvir Mirchandani, Daniel Morton, Tony Nguyen, Abigail O'Neill, Rosario Scalise, Derick Seale, Victor Son, Stephen Tian, Emi Tran, Andrew E. Wang, Yilin Wu, Annie Xie, Jingyun Yang, Patrick Yin, Yunchu Zhang, Osbert Bastani, Glen Berseth, Jeannette Bohg, Ken Goldberg, Abhinav Gupta, Abhishek Gupta, Dinesh Jayaraman, Joseph J Lim, Jitendra Malik, Roberto Martín-Martín, Subramanian Ramamoorthy, Dorsa Sadigh, Shuran Song, Jiajun Wu, Michael C. Yip, Yuke Zhu, Thomas Kollar, Sergey Levine, Chelsea Finn
+                    <br>
+                    <span class="is-size-6"><sup>*</sup>Co-Lead</span>
+                </span>
+            </div>
+              </p>
+          
+              <div class="paper" id="droid">
+                  <a href="https://droid-dataset.github.io">webpage</a> |
+                  <a href="javascript:toggleblock('droid_abs')">abstract</a> |
+                  <a shape="rect" href="javascript:togglebib('droid')" class="togglebib">bibtex</a> |
+                  <a href="https://arxiv.org/abs/2403.12945">arXiv</a>
+              
+                  <abs align="justify" id="droid_abs">The creation of large, diverse, high-quality robot manipulation datasets is an important stepping stone on the path toward more capable and robust robotic manipulation policies. However, creating such datasets is challenging: collecting robot manipulation data in diverse environments poses logistical and safety challenges and requires substantial investments in hardware and human labour. As a result, even the most general robot manipulation policies today are mostly trained on data collected in a small number of environments with limited scene and task diversity. In this work, we introduce DROID (Distributed Robot Interaction Dataset), a diverse robot manipulation dataset with 76k demonstration trajectories or 350h of interaction data, collected across 564 scenes and 86 tasks by 50 data collectors in North America, Asia, and Europe over the course of 12 months. We demonstrate that training with DROID leads to policies with higher performance, greater robustness, and improved generalization ability. We open source the full dataset, code for policy training, and a detailed guide for reproducing our robot hardware setup.</abs>
+              
+                  <pre xml:space="preserve">
+@article{khazatsky2024droid,
+  title   = {DROID: A Large-Scale In-The-Wild Robot Manipulation Dataset},
+  author  = {Alexander Khazatsky and Karl Pertsch and Suraj Nair and Ashwin Balakrishna and Sudeep Dasari and Siddharth Karamcheti and Soroush Nasiriany and Mohan Kumar Srirama and Lawrence Yunliang Chen and Kirsty Ellis and Peter David Fagan and Joey Hejna and Masha Itkina and Marion Lepert and Yecheng Jason Ma and Patrick Tree Miller and Jimmy Wu and Suneel Belkhale and Shivin Dass and Huy Ha and Arhan Jain and Abraham Lee and Youngwoon Lee and Marius Memmel and Sungjae Park and Ilija Radosavovic and Kaiyuan Wang and Albert Zhan and Kevin Black and Cheng Chi and Kyle Beltran Hatch and Shan Lin and Jingpei Lu and Jean Mercat and Abdul Rehman and Pannag R Sanketi and Archit Sharma and Cody Simpson and Quan Vuong and Homer Rich Walke and Blake Wulfe and Ted Xiao and Jonathan Heewon Yang and Arefeh Yavary and Tony Z. Zhao and Christopher Agia and Rohan Baijal and Mateo Guaman Castro and Daphne Chen and Qiuyu Chen and Trinity Chung and Jaimyn Drake and Ethan Paul Foster and Jensen Gao and David Antonio Herrera and Minho Heo and Kyle Hsu and Jiaheng Hu and Donovon Jackson and Charlotte Le and Yunshuang Li and Kevin Lin and Roy Lin and Zehan Ma and Abhiram Maddukuri and Suvir Mirchandani and Daniel Morton and Tony Nguyen and Abigail O'Neill and Rosario Scalise and Derick Seale and Victor Son and Stephen Tian and Emi Tran and Andrew E. Wang and Yilin Wu and Annie Xie and Jingyun Yang and Patrick Yin and Yunchu Zhang and Osbert Bastani and Glen Berseth and Jeannette Bohg and Ken Goldberg and Abhinav Gupta and Abhishek Gupta and Dinesh Jayaraman and Joseph J Lim and Jitendra Malik and Roberto Martín-Martín and Subramanian Ramamoorthy and Dorsa Sadigh and Shuran Song and Jiajun Wu and Michael C. Yip and Yuke Zhu and Thomas Kollar and Sergey Levine and Chelsea Finn},
+  year    = {2024},
+}
+                  </pre>
+              </div>
+            </td>
+          </tr>
+
           <tr>
             <td width="33%" valign="top" align="center"><a href="https://octo-models.github.io">
               <video autoplay loop muted playsinline src="https://octo-models.github.io/videos/out_cmu.mp4" alt="Loading!" width="180" style="padding-top:0px;padding-bottom:0px;border-radius:15px;border:1px solid black"></video>
